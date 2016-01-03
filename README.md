@@ -1,6 +1,7 @@
 # DNN_Mnist
 Feedforward Neural Network implementation for MNIST
 
+[![Build Status](https://travis-ci.org/cameronphchen/DNN_Mnist.svg?branch=master)](https://travis-ci.org/cameronphchen/DNN_Mnist)
 
 2016/1/1:
 Start implementation of multilayer perceptron (MLP) for MNIST recognition
