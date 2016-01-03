@@ -30,4 +30,5 @@ linear layer
 nonlinearity
 output layer
 
-
+2016/1/3 
+set up travis-CI for testing
