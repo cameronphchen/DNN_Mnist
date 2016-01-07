@@ -2,7 +2,7 @@ import sklearn.datasets
 import numpy as np
 import dnn
 
-mnist = sklearn.datasets.fetch_mldata('mnist-original', data_home='../data/input')
+mnist = sklearn.datasets.fetch_mldata('mnist-original', data_home='data/input')
 X_trn = mnist.data[:60000].T/255.0
 X_tst = mnist.data[60000:].T/255.0
 Y_trn = mnist.target[:60000].T
@@ -19,4 +19,6 @@ layers = [
     dnn.SoftMaxLayer()
 ]
 
-network = nn.NeuralNetwork
+# set up MLP and train
+network = nn.NeuralNetwork(layers)
+network.train(X_trn, Y_trn)

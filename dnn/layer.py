@@ -9,7 +9,7 @@ class Layer(object):
     def forwardprop(self, inp):
         raise NotImplementedError()
 
-    def backprop(self):
+    def backprop(self, out_grad):
         raise NotImplementedError()
 
 
@@ -21,15 +21,22 @@ class LinearLayer(Layer):
 
     def _setup(self, insize, rnd):
         W_shape = (self.outsize, insize)
-        self.W = rnd.normal(W_shape, scale=Wscale)
+        self.W = rnd.normal(W_shape, scale=self.Wscale)
         self.b = np.zeros(self.outsize)
 
     def forwardprop(self, inp):
         self.last_inp = inp
         return self.W.dot(inp) + self.b
 
-    def backprop(self):
-        # TODO
+    def backprop(self, out_grad, learning_rate):
+        # calculate gradient
+        self.dW = np.outer(out_grad, self.last_inp)
+        self.db = np.mean(out_grad, axis=1)
+        # update parameters
+        self.W -= learning_rate*self.dW
+        self.b -= learning_rate*self.db
+
+        return self.W.T.dot(out_grad)
 
 
 class ActivationLayer(Layer):
@@ -47,10 +54,11 @@ class ActivationLayer(Layer):
             raise ValueError('invalid activation type')
 
     def forwardprop(self, inp):
+        self.last_inp = inp
         return self.func(inp)
 
-    def backprop(self):
-        # TODO
+    def backprop(self, out_grad):
+        return out_grad*self.func_d(self.last_inp)
 
 
 class SoftMax(Layer):
@@ -62,6 +70,5 @@ class SoftMax(Layer):
         raise NotImplementedError('output layer, no back prop')
 
     def loss(self, y, y_pred):
-        loss = -np.sum( np.multiply(y, y_pred))
+        loss = -np.sum(np.multiply(y, y_pred))
         return loss/y.shape[0]
-

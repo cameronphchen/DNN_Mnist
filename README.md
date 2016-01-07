@@ -12,6 +12,8 @@ Start implementation of multilayer perceptron (MLP) for MNIST recognition
 
 reference:
 - http://deeplearning.net/tutorial/mlp.html
+- http://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/
+- http://ufldl.stanford.edu/tutorial/supervised/MultiLayerNeuralNetworks/
 - https://github.com/andersbll/nnet
 
 Modules:
