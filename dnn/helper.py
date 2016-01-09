@@ -11,7 +11,7 @@ def onehot(labels):
 
 
 def unhot(one_hot_labels):
-    return np.argmax(one_hot_labels, axis=-1)
+    return np.argmax(one_hot_labels, axis=0)
 
 
 def sigmoid(x):
@@ -24,7 +24,7 @@ def sigmoid_d(x):
 
 
 def relu(x):
-    return np.max(0, x)
+    return np.maximum(0.0, x)
 
 
 def relu_d(x):
